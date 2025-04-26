@@ -1,5 +1,5 @@
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from requests.packages.urllib3.exceptions import InsecureRequestWarning # type: ignore
 from .tech_stack import analyze_stack
 from .fallback import fallback_curl_request
 
@@ -20,7 +20,7 @@ def check_security_web(url):
         response = requests.get(url, verify=False, timeout=30)
         headers = response.headers
 
-        tech_info = analyze_stack(headers)
+        tech_info = analyze_stack(headers, response.text)
         if tech_info:
             print("\n🧠 Detected Technology Stack:")
             for tech in tech_info:
@@ -30,7 +30,8 @@ def check_security_web(url):
         for header in required_headers:
             if header in headers:
                 if header in ["Server", "X-Powered-By"]:
-                    print(f"⚠️  {header}: Found → Consider removing or obfuscating this")
+                    tech = headers[header]
+                    print(f"⚠️  {header}: Found → {tech} → Consider removing or obfuscating this")
                 else:
                     print(f"✅ {header}: Found")
             else:
