@@ -1,5 +1,5 @@
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning # type: ignore
+from requests.packages.urllib3.exceptions import InsecureRequestWarning  # type: ignore
 from .tech_stack import analyze_stack
 from .fallback import fallback_curl_request
 
@@ -16,17 +16,25 @@ def check_security_web(url):
     ]
 
     try:
-        print(f"\n🔍 Checking security headers for: {url}\n")
+        print("\n" + "="*60)
+        print(f"🔍 Checking Security Headers for: {url}")
+        print("="*60 + "\n")
+
         response = requests.get(url, verify=False, timeout=30)
         headers = response.headers
 
+        # 🧠 Technology Stack
         tech_info = analyze_stack(headers, response.text)
         if tech_info:
-            print("\n🧠 Detected Technology Stack:")
+            print("🧠 Detected Technology Stack:")
+            print("-"*60)
             for tech in tech_info:
-                print(f"   {tech}")
+                print(f"{tech}")
+            print("-"*60 + "\n")
 
-        print("\n🛡️ Security Header Check:")
+        # 🛡️ Security Header Check
+        print("🛡️ Security Header Check:")
+        print("-"*60)
         for header in required_headers:
             if header in headers:
                 if header in ["Server", "X-Powered-By"]:
@@ -39,8 +47,11 @@ def check_security_web(url):
                     print(f"✅ {header}: Not Found → Good (Information not exposed)")
                 else:
                     print(f"❌ {header}: Not Found")
+        print("-"*60 + "\n")
 
-        print("\n🍪 Cookie Security Check:")
+        # 🍪 Cookie Check
+        print("🍪 Cookie Security Check:")
+        print("-"*60)
         cookies = response.headers.get("Set-Cookie")
         if cookies:
             print(f"   {'✅' if 'Secure' in cookies else '❌'} Secure")
@@ -48,8 +59,11 @@ def check_security_web(url):
             print(f"   {'✅' if 'SameSite' in cookies else '❌'} SameSite")
         else:
             print("   ❌ Set-Cookie: Not Found")
+        print("-"*60 + "\n")
 
-        print("\n🚨 Potential Security Risks:")
+        # 🚨 Risk Section
+        print("🚨 Potential Security Risks:")
+        print("-"*60)
         if "Content-Security-Policy" not in headers:
             print("   🔴 Missing CSP → Risk of XSS attacks")
         if "Strict-Transport-Security" not in headers:
@@ -58,6 +72,7 @@ def check_security_web(url):
             print("   🔴 Server info exposed → Could allow targeted attacks")
         if "X-Powered-By" in headers:
             print("   🔴 X-Powered-By exposed → Technology fingerprinting risk")
+        print("="*60 + "\n")
 
     except (requests.exceptions.SSLError, requests.exceptions.ReadTimeout) as err:
         print(f"\n⚠ Connection issue with {url}: {err}")
