@@ -43,20 +43,56 @@ python main.py
 ```
 ✅ Example Output
 ```bash
-🔍 Checking security headers for: https://example.com/
+============================================================
+🔍 Checking Security Headers for: https://sarus.vercel.app/
+============================================================
 
 🧠 Detected Technology Stack:
-   🧱 Server: Nginx
-   🛠️ Powered by: PHP/7.4
+------------------------------------------------------------
+
+📦 Server & Hosting:
+   🧱 Server: Vercel
+   ☁️ Hosting: Vercel
+
+📦 Frontend:
+   ⚛️ Frontend: React
+   🖖 Framework: Vue.js
+   🚀 Framework: Nuxt.js
+
+📦 Backend / API:
+   🔥 BaaS: Firebase
+------------------------------------------------------------
 
 🛡️ Security Header Check:
-   ✅ X-Frame-Options: Found
-   ❌ Content-Security-Policy: Not Found
-   ⚠️  Server: Found → Consider removing or obfuscating this
+------------------------------------------------------------
+❌ X-Frame-Options: Not Found
+❌ X-XSS-Protection: Not Found
+❌ Content-Security-Policy: Not Found
+❌ X-Content-Type-Options: Not Found
+✅ Strict-Transport-Security: Found
+❌ Referrer-Policy: Not Found
+❌ Permissions-Policy: Not Found
+❌ Cross-Origin-Resource-Policy: Not Found
+❌ Cross-Origin-Opener-Policy: Not Found
+❌ Cross-Origin-Embedder-Policy: Not Found
+✅ Access-Control-Allow-Origin: Found
+✅ Cache-Control: Found
+❌ Pragma: Not Found
+❌ Expires: Not Found
+✅ Content-Disposition: Found
+⚠️  Server: Found → Vercel → Consider removing or obfuscating this
+✅ X-Powered-By: Not Found → Good (Information not exposed)
+------------------------------------------------------------
 
 🍪 Cookie Security Check:
-   ✅ Secure
-   ✅ HttpOnly
-   ❌ SameSite
+------------------------------------------------------------
+   ❌ Set-Cookie: Not Found
+------------------------------------------------------------
+
+🚨 Potential Security Risks:
+------------------------------------------------------------
+   🔴 Missing CSP → Risk of XSS attacks
+   🔴 Server info exposed → Could allow targeted attacks
+============================================================
 
 ```
