@@ -3,16 +3,17 @@
 A Python tool to analyze HTTP security headers and detect exposed server technologies.
 
 ## 📁 Structure
-
+```bash
 web-security-checker/ 
 ├── main.py # Entry point 
-├── checker/ # Core logic 
-│ ├── headers.py # Security header checking 
-│ ├── tech_stack.py # Detect tech stack from headers 
+├── checker/ 
 │ ├── fallback.py # Curl fallback for failed requests 
-│ └── init.py 
+│ ├── headers.py # Detect tech stack from headers 
+│ ├── tech_stack.py # Security header checking 
+│ └── __init__.py 
 ├── requirements.txt # Python dependencies 
 └── README.md # Project documentation
+```
 
 
 ## 🚀 Usage
