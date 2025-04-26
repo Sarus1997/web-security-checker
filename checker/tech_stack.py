@@ -102,4 +102,26 @@ def analyze_stack(headers, body_text=""):
     if "torch" in body_text.lower() or "pytorch" in body_text.lower():
         tech_info.append("🔥 ML: PyTorch")
 
+    # Database
+    if "mongodb" in body_text.lower():
+        tech_info.append("🗃️ Database: MongoDB")
+    if "mysql" in body_text.lower():
+        tech_info.append("🗃️ Database: MySQL")
+    if "postgresql" in body_text.lower() or "postgres" in body_text.lower():
+        tech_info.append("🗃️ Database: PostgreSQL")
+    if "sqlite" in body_text.lower():
+        tech_info.append("🗃️ Database: SQLite")
+    if "redis" in body_text.lower():
+        tech_info.append("⚡ Cache/DB: Redis")
+
+    # Payment Gateway
+    if "stripe" in body_text.lower():
+        tech_info.append("💳 Payment: Stripe")
+    if "paypal" in body_text.lower():
+        tech_info.append("💳 Payment: PayPal")
+    if "square" in body_text.lower():
+        tech_info.append("💳 Payment: Square")
+    if "omise" in body_text.lower():
+        tech_info.append("💳 Payment: Omise")
+
     return tech_info
